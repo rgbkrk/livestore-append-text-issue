@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@livestore/adapter-node':
+        specifier: ^0.3.1
+        version: 0.3.1(1a17b833c09e522bd4d69cf4c85d203d)
       '@livestore/adapter-web':
         specifier: 0.3.1
         version: 0.3.1(505c75a1204e4cf21acbbd6b3e225a6b)
@@ -753,6 +756,9 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
+  '@livestore/adapter-node@0.3.1':
+    resolution: {integrity: sha512-qP6nGY8du3r+4aS4yJ2YgaDVp/KzE/qBzOzleFTBR9DEM0faeLI9EXzwVq9A/k8pbxm5heF78l0ConExxxl42Q==}
+
   '@livestore/adapter-web@0.3.1':
     resolution: {integrity: sha512-0ZKTam+C3KeG5qiiTLFOgoMhdUBCENmuaMwxoj7WOtA2c4eKyqIy+P/1zga+az0XqaMJoG5FVszWhWMUMzNjtQ==}
 
@@ -1468,6 +1474,46 @@ packages:
     resolution: {integrity: sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A==}
     hasBin: true
 
+  vite@6.3.4:
+    resolution: {integrity: sha512-BiReIiMS2fyFqbqNT/Qqt4CVITDU9M9vE+DKcVAsB+ZV0wvTKd+3hMbkpxz1b+NmEDMegpVbisKiAZOnvO92Sw==}
+    engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': ^18.0.0 || ^20.0.0 || >=22.0.0
+      jiti: '>=1.21.0'
+      less: '*'
+      lightningcss: ^1.21.0
+      sass: '*'
+      sass-embedded: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.16.0
+      tsx: ^4.8.1
+      yaml: ^2.4.2
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      jiti:
+        optional: true
+      less:
+        optional: true
+      lightningcss:
+        optional: true
+      sass:
+        optional: true
+      sass-embedded:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+      tsx:
+        optional: true
+      yaml:
+        optional: true
+
   vite@6.3.5:
     resolution: {integrity: sha512-cZn6NDFE7wdTpINgs++ZJ4N49W2vRp8LCKrn3Ob1kYNtOo21vfDoaV5GzBfLU4MovSAB8uNRm4jgzVQZ+mBzPQ==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
@@ -2079,6 +2125,43 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.4
 
+  '@livestore/adapter-node@0.3.1(1a17b833c09e522bd4d69cf4c85d203d)':
+    dependencies:
+      '@livestore/common': 0.3.1(505c75a1204e4cf21acbbd6b3e225a6b)
+      '@livestore/devtools-vite': 0.3.1(f14ce635a9907727498530f7e616a5d2)
+      '@livestore/sqlite-wasm': 0.3.1(a2602a20d83ff4e94e4a35c6aa299805)
+      '@livestore/utils': 0.3.1(a2602a20d83ff4e94e4a35c6aa299805)
+      '@livestore/webmesh': 0.3.1(a2602a20d83ff4e94e4a35c6aa299805)
+      '@opentelemetry/api': 1.9.0
+      vite: 6.3.4(yaml@2.8.0)
+    transitivePeerDependencies:
+      - '@effect/cli'
+      - '@effect/cluster'
+      - '@effect/experimental'
+      - '@effect/opentelemetry'
+      - '@effect/platform'
+      - '@effect/platform-browser'
+      - '@effect/platform-bun'
+      - '@effect/platform-node'
+      - '@effect/printer'
+      - '@effect/printer-ansi'
+      - '@effect/rpc'
+      - '@effect/sql'
+      - '@effect/typeclass'
+      - '@opentelemetry/resources'
+      - '@types/node'
+      - effect
+      - jiti
+      - less
+      - lightningcss
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - terser
+      - tsx
+      - yaml
+
   '@livestore/adapter-web@0.3.1(505c75a1204e4cf21acbbd6b3e225a6b)':
     dependencies:
       '@livestore/common': 0.3.1(505c75a1204e4cf21acbbd6b3e225a6b)
@@ -2126,6 +2209,29 @@ snapshots:
       - '@effect/rpc'
       - '@effect/sql'
       - '@effect/typeclass'
+      - '@opentelemetry/resources'
+      - effect
+
+  '@livestore/devtools-vite@0.3.1(f14ce635a9907727498530f7e616a5d2)':
+    dependencies:
+      '@livestore/adapter-web': 0.3.1(505c75a1204e4cf21acbbd6b3e225a6b)
+      '@livestore/utils': 0.3.1(a2602a20d83ff4e94e4a35c6aa299805)
+      vite: 6.3.4(yaml@2.8.0)
+    transitivePeerDependencies:
+      - '@effect/cli'
+      - '@effect/cluster'
+      - '@effect/experimental'
+      - '@effect/opentelemetry'
+      - '@effect/platform'
+      - '@effect/platform-browser'
+      - '@effect/platform-bun'
+      - '@effect/platform-node'
+      - '@effect/printer'
+      - '@effect/printer-ansi'
+      - '@effect/rpc'
+      - '@effect/sql'
+      - '@effect/typeclass'
+      - '@opentelemetry/api'
       - '@opentelemetry/resources'
       - effect
 
@@ -2954,6 +3060,18 @@ snapshots:
       picocolors: 1.1.1
 
   uuid@11.1.0: {}
+
+  vite@6.3.4(yaml@2.8.0):
+    dependencies:
+      esbuild: 0.25.8
+      fdir: 6.4.6(picomatch@4.0.3)
+      picomatch: 4.0.3
+      postcss: 8.5.6
+      rollup: 4.45.1
+      tinyglobby: 0.2.14
+    optionalDependencies:
+      fsevents: 2.3.3
+      yaml: 2.8.0
 
   vite@6.3.5(yaml@2.8.0):
     dependencies:
