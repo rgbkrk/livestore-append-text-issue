@@ -20,6 +20,15 @@ export const tables = {
       }),
     },
   }),
+  outputChunks: State.SQLite.table({
+    name: "outputChunks",
+    columns: {
+      id: State.SQLite.text({ primaryKey: true }),
+      outputId: State.SQLite.text({ nullable: false }),
+      // outputId: State.SQLite.text({ foreignKey: "outputs.id" }),
+      text: State.SQLite.text({ default: "" }),
+    },
+  }),
   outputs: State.SQLite.table({
     name: "outputs",
     columns: {
@@ -46,7 +55,11 @@ export const events = {
   }),
   outputAppended: Events.synced({
     name: "v1.OutputAppended",
-    schema: Schema.Struct({ id: Schema.String, text: Schema.String }),
+    schema: Schema.Struct({
+      id: Schema.String,
+      outputId: Schema.String,
+      text: Schema.String,
+    }),
   }),
   todoCreated: Events.synced({
     name: "v1.TodoCreated",
@@ -84,22 +97,8 @@ const materializers = State.SQLite.materializers(events, {
   "v1.TodoClearedCompleted": ({ deletedAt }) =>
     tables.todos.update({ deletedAt }).where({ completed: true }),
   "v1.OutputCreated": ({ id, text }) => tables.outputs.insert({ id, text }),
-  "v1.OutputAppended": ({ id, text }, ctx) => {
-    const ops = [];
-
-    const existingOutput = ctx.query(
-      tables.outputs.select().where({ id }).limit(1),
-    )[0];
-
-    if (!existingOutput) {
-      console.log("Output not found");
-      return [];
-    }
-
-    const newContent = text;
-    const concatenatedData = (existingOutput.text || "") + newContent;
-
-    return [tables.outputs.update({ text: concatenatedData }).where({ id })];
+  "v1.OutputAppended": ({ id, outputId, text }, ctx) => {
+    return tables.outputChunks.insert({ id, outputId, text });
   },
 });
 

@@ -28,7 +28,7 @@ async function tokenGeneration(store: Store<typeof schema>) {
     }),
   );
 
-  await sleep(10);
+  // await sleep(10);
 
   const outputId2 = crypto.randomUUID();
 
@@ -38,7 +38,7 @@ async function tokenGeneration(store: Store<typeof schema>) {
       text: "AI wrote this:",
     }),
   );
-  await sleep(20);
+  // await sleep(20);
 
   // simulate LLM token generation
   let text2 = `
@@ -62,10 +62,13 @@ async function tokenGeneration(store: Store<typeof schema>) {
     const chunkSize = Math.floor(Math.random() * 2) + 1;
     const chunk = text2.slice(currentPos, currentPos + chunkSize);
 
-    await sleep(6);
+    const chunkId = crypto.randomUUID();
+
+    // await sleep(6);
     store.commit(
       events.outputAppended({
-        id: outputId2,
+        id: chunkId,
+        outputId: outputId2,
         text: chunk,
       }),
     );
