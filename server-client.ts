@@ -18,27 +18,7 @@ const adapter = makeAdapter({
 const sleep = async (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
-let store: Store<typeof schema>;
-
-async function main(storeId?: string) {
-  if (!storeId) {
-    storeId = `test-${crypto.randomUUID()}`;
-  }
-  console.log(`Connecting to storeId: ${storeId}`);
-
-  store = await createStorePromise({
-    adapter,
-    schema,
-    storeId,
-    syncPayload: { authToken: "insecure-token-change-me" },
-    onBootStatus: (status) => {
-      console.log(status);
-    },
-  });
-
-  // TODO: Figure out how to start work when store initially synced
-  await sleep(100);
-
+async function tokenGeneration(store: Store<typeof schema>) {
   const outputId = crypto.randomUUID();
 
   store.commit(
@@ -82,7 +62,7 @@ async function main(storeId?: string) {
     const chunkSize = Math.floor(Math.random() * 2) + 1;
     const chunk = text2.slice(currentPos, currentPos + chunkSize);
 
-    await sleep(10);
+    await sleep(6);
     store.commit(
       events.outputAppended({
         id: outputId2,
@@ -92,12 +72,34 @@ async function main(storeId?: string) {
 
     currentPos += chunkSize;
   }
+}
 
-  await sleep(500);
-
-  if (store) {
-    store.shutdown();
+async function main(storeId?: string) {
+  if (!storeId) {
+    storeId = `test-${crypto.randomUUID()}`;
   }
+  console.log(`Connecting to storeId: ${storeId}`);
+
+  const store = await createStorePromise({
+    adapter,
+    schema,
+    storeId,
+    syncPayload: { authToken: "insecure-token-change-me" },
+    onBootStatus: (status) => {
+      console.log(status);
+    },
+    boot: (store) => {
+      store.manualRefresh();
+      tokenGeneration(store);
+    },
+  });
+
+  process.on("SIGINT", () => {
+    console.log("Received SIGINT");
+    if (store) {
+      store.shutdown();
+    }
+  });
 }
 
 // @ts-ignore
@@ -106,10 +108,5 @@ main(storeId)
   .then(() => {
     console.log("Done");
   })
-  .catch((error) => {
-    console.error(error);
-    if (store) {
-      store.shutdown();
-    }
-  })
+  .catch((error) => {})
   .finally(() => {});

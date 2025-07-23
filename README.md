@@ -31,7 +31,6 @@ LiveStore exhibits weird behavior.
 ```bash
 export VITE_LIVESTORE_SYNC_URL='http://localhost:8787'
 pnpm i
-pnpm dev
 ```
 
 Once you have a store ID from the TODO MVC, open up a terminal and run:
@@ -41,6 +40,15 @@ tsx server-client.ts {your store ID}
 ```
 
 That will rapidly add text as if an LLM (or a plain computer) types in little batches of tokens at a time.
+
+## One liner
+
+```
+export STORE_ID=$(head -c 10 /dev/urandom | xxd -p); open "http://localhost:60001/?storeId=$STORE_ID" ; echo "Waiting for ui to load"; sleep 5; echo "Away we go!"; tsx server-client.ts $STORE_ID
+```
+
+## What happens
+
 
 Several things will likely occur. One of which is the materializer hash mismatch detection should show up in the tab you ran it from.
 

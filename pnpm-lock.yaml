@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@livestore/adapter-node':
         specifier: ^0.3.1
-        version: 0.3.1(1a17b833c09e522bd4d69cf4c85d203d)
+        version: 0.3.1(cb907d72edc9ed22bc4eb59bfdb4e314)
       '@livestore/adapter-web':
         specifier: 0.3.1
         version: 0.3.1(505c75a1204e4cf21acbbd6b3e225a6b)
@@ -44,7 +44,10 @@ importers:
     devDependencies:
       '@livestore/devtools-vite':
         specifier: ^0.3.1
-        version: 0.3.1(f1eac638a2118a3a35ee1d43a8acf364)
+        version: 0.3.1(705c5f9e0c11591d2d760e5c7d682857)
+      '@types/node':
+        specifier: ^24.1.0
+        version: 24.1.0
       '@types/react':
         specifier: ^19.1.2
         version: 19.1.8
@@ -53,13 +56,13 @@ importers:
         version: 19.1.6(@types/react@19.1.8)
       '@vitejs/plugin-react':
         specifier: ^4.3.4
-        version: 4.7.0(vite@6.3.5(yaml@2.8.0))
+        version: 4.7.0(vite@6.3.5(@types/node@24.1.0)(yaml@2.8.0))
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
       vite:
         specifier: ^6.3.4
-        version: 6.3.5(yaml@2.8.0)
+        version: 6.3.5(@types/node@24.1.0)(yaml@2.8.0)
       wrangler:
         specifier: ^4.14.4
         version: 4.25.1
@@ -1090,6 +1093,9 @@ packages:
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
 
+  '@types/node@24.1.0':
+    resolution: {integrity: sha512-ut5FthK5moxFKH2T1CUOC6ctR67rQRvvHdFLCD2Ql6KXmMuCrjsSsRI9UsLCm9M18BMwClv4pn327UvB7eeO1w==}
+
   '@types/react-dom@19.1.6':
     resolution: {integrity: sha512-4hOiT/dwO8Ko0gV1m/TJZYk3y0KBnY9vzDh7W+DH17b2HFSOGgdj33dhihPeuy3l0q23+4e+hoXHV6hCC4dCXw==}
     peerDependencies:
@@ -1456,6 +1462,9 @@ packages:
 
   ufo@1.6.1:
     resolution: {integrity: sha512-9a4/uxlTWJ4+a5i0ooc1rU7C7YOw3wT+UGqdeNNHWnOF9qcMBgLRS+4IYUqbczewFx4mLEig6gawh7X6mFlEkA==}
+
+  undici-types@7.8.0:
+    resolution: {integrity: sha512-9UJ2xGDvQ43tYyVMpuHlsgApydB8ZKfVYTsLDhXkFL/6gfkp+U8xTGdh8pMJv1SpZna0zxG1DwsKZsreLbXBxw==}
 
   undici@7.12.0:
     resolution: {integrity: sha512-GrKEsc3ughskmGA9jevVlIOPMiiAHJ4OFUtaAH+NhfTUSiZ1wMPIQqQvAJUrJspFXJt3EBWgpAeoHEDVT1IBug==}
@@ -2125,15 +2134,15 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.4
 
-  '@livestore/adapter-node@0.3.1(1a17b833c09e522bd4d69cf4c85d203d)':
+  '@livestore/adapter-node@0.3.1(cb907d72edc9ed22bc4eb59bfdb4e314)':
     dependencies:
       '@livestore/common': 0.3.1(505c75a1204e4cf21acbbd6b3e225a6b)
-      '@livestore/devtools-vite': 0.3.1(f14ce635a9907727498530f7e616a5d2)
+      '@livestore/devtools-vite': 0.3.1(9f618a6d520d123073b8928b20dcacac)
       '@livestore/sqlite-wasm': 0.3.1(a2602a20d83ff4e94e4a35c6aa299805)
       '@livestore/utils': 0.3.1(a2602a20d83ff4e94e4a35c6aa299805)
       '@livestore/webmesh': 0.3.1(a2602a20d83ff4e94e4a35c6aa299805)
       '@opentelemetry/api': 1.9.0
-      vite: 6.3.4(yaml@2.8.0)
+      vite: 6.3.4(@types/node@24.1.0)(yaml@2.8.0)
     transitivePeerDependencies:
       - '@effect/cli'
       - '@effect/cluster'
@@ -2212,11 +2221,11 @@ snapshots:
       - '@opentelemetry/resources'
       - effect
 
-  '@livestore/devtools-vite@0.3.1(f14ce635a9907727498530f7e616a5d2)':
+  '@livestore/devtools-vite@0.3.1(705c5f9e0c11591d2d760e5c7d682857)':
     dependencies:
       '@livestore/adapter-web': 0.3.1(505c75a1204e4cf21acbbd6b3e225a6b)
       '@livestore/utils': 0.3.1(a2602a20d83ff4e94e4a35c6aa299805)
-      vite: 6.3.4(yaml@2.8.0)
+      vite: 6.3.5(@types/node@24.1.0)(yaml@2.8.0)
     transitivePeerDependencies:
       - '@effect/cli'
       - '@effect/cluster'
@@ -2235,11 +2244,11 @@ snapshots:
       - '@opentelemetry/resources'
       - effect
 
-  '@livestore/devtools-vite@0.3.1(f1eac638a2118a3a35ee1d43a8acf364)':
+  '@livestore/devtools-vite@0.3.1(9f618a6d520d123073b8928b20dcacac)':
     dependencies:
       '@livestore/adapter-web': 0.3.1(505c75a1204e4cf21acbbd6b3e225a6b)
       '@livestore/utils': 0.3.1(a2602a20d83ff4e94e4a35c6aa299805)
-      vite: 6.3.5(yaml@2.8.0)
+      vite: 6.3.4(@types/node@24.1.0)(yaml@2.8.0)
     transitivePeerDependencies:
       - '@effect/cli'
       - '@effect/cluster'
@@ -2648,6 +2657,10 @@ snapshots:
 
   '@types/estree@1.0.8': {}
 
+  '@types/node@24.1.0':
+    dependencies:
+      undici-types: 7.8.0
+
   '@types/react-dom@19.1.6(@types/react@19.1.8)':
     dependencies:
       '@types/react': 19.1.8
@@ -2656,7 +2669,7 @@ snapshots:
     dependencies:
       csstype: 3.1.3
 
-  '@vitejs/plugin-react@4.7.0(vite@6.3.5(yaml@2.8.0))':
+  '@vitejs/plugin-react@4.7.0(vite@6.3.5(@types/node@24.1.0)(yaml@2.8.0))':
     dependencies:
       '@babel/core': 7.28.0
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.28.0)
@@ -2664,7 +2677,7 @@ snapshots:
       '@rolldown/pluginutils': 1.0.0-beta.27
       '@types/babel__core': 7.20.5
       react-refresh: 0.17.0
-      vite: 6.3.5(yaml@2.8.0)
+      vite: 6.3.5(@types/node@24.1.0)(yaml@2.8.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -3043,6 +3056,8 @@ snapshots:
 
   ufo@1.6.1: {}
 
+  undici-types@7.8.0: {}
+
   undici@7.12.0: {}
 
   unenv@2.0.0-rc.17:
@@ -3061,7 +3076,7 @@ snapshots:
 
   uuid@11.1.0: {}
 
-  vite@6.3.4(yaml@2.8.0):
+  vite@6.3.4(@types/node@24.1.0)(yaml@2.8.0):
     dependencies:
       esbuild: 0.25.8
       fdir: 6.4.6(picomatch@4.0.3)
@@ -3070,10 +3085,11 @@ snapshots:
       rollup: 4.45.1
       tinyglobby: 0.2.14
     optionalDependencies:
+      '@types/node': 24.1.0
       fsevents: 2.3.3
       yaml: 2.8.0
 
-  vite@6.3.5(yaml@2.8.0):
+  vite@6.3.5(@types/node@24.1.0)(yaml@2.8.0):
     dependencies:
       esbuild: 0.25.8
       fdir: 6.4.6(picomatch@4.0.3)
@@ -3082,6 +3098,7 @@ snapshots:
       rollup: 4.45.1
       tinyglobby: 0.2.14
     optionalDependencies:
+      '@types/node': 24.1.0
       fsevents: 2.3.3
       yaml: 2.8.0
 
