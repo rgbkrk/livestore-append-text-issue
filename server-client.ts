@@ -4,7 +4,7 @@ import { makeAdapter } from "@livestore/adapter-node";
 import { makeCfSync } from "@livestore/sync-cf";
 
 import { events, schema } from "./src/livestore/schema.ts";
-import { createStorePromise } from "@livestore/livestore";
+import { createStorePromise, Store } from "@livestore/livestore";
 
 const adapter = makeAdapter({
   storage: { type: "in-memory" },
@@ -18,21 +18,26 @@ const adapter = makeAdapter({
 const sleep = async (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
-let store;
+let store: Store<typeof schema>;
 
 async function main(storeId?: string) {
   if (!storeId) {
     storeId = `test-${crypto.randomUUID()}`;
   }
-  console.log(storeId);
-  // const storeId = "test-19a3812a-952a-4c8d-9cc8-a7506ae6b3f2";
+  console.log(`Connecting to storeId: ${storeId}`);
 
   store = await createStorePromise({
     adapter,
     schema,
     storeId,
     syncPayload: { authToken: "insecure-token-change-me" },
+    onBootStatus: (status) => {
+      console.log(status);
+    },
   });
+
+  // TODO: Figure out how to start work when store initially synced
+  await sleep(100);
 
   const outputId = crypto.randomUUID();
 
@@ -43,18 +48,19 @@ async function main(storeId?: string) {
     }),
   );
 
-  // await sleep(10);
+  await sleep(10);
 
   const outputId2 = crypto.randomUUID();
 
   store.commit(
     events.outputCreated({
       id: outputId2,
-      text: "Output 2",
+      text: "AI wrote this:",
     }),
   );
-  await sleep(0);
+  await sleep(20);
 
+  // simulate LLM token generation
   let text2 = `
   A whisper grows in copper veins,
   Not loud, but firm—it makes its claims.
@@ -69,29 +75,29 @@ async function main(storeId?: string) {
   Yield, then pulse—let flow resume.
   Control returns; no need for doom.
   Backpressure’s art is not delay,
-  But balance taught the hard-wired way.`;
+  But balance taught the hard-wired way.`.trim();
 
-  for (let i = 0; i < text2.length; i += Math.floor(Math.random() * 2) + 1) {
-    await sleep(0);
+  let currentPos = 0;
+  while (currentPos < text2.length) {
+    const chunkSize = Math.floor(Math.random() * 2) + 1;
+    const chunk = text2.slice(currentPos, currentPos + chunkSize);
+
+    await sleep(10);
     store.commit(
       events.outputAppended({
         id: outputId2,
-        text: text2.slice(i, i + Math.min(2, text2.length - i)),
+        text: chunk,
       }),
     );
+
+    currentPos += chunkSize;
   }
 
-  for (let i = 0; i < text2.length; i += Math.floor(Math.random() * 2) + 1) {
-    await sleep(0);
-    store.commit(
-      events.outputAppended({
-        id: outputId2,
-        text: text2.slice(i, i + Math.min(2, text2.length - i)),
-      }),
-    );
-  }
+  await sleep(500);
 
-  await sleep(10);
+  if (store) {
+    store.shutdown();
+  }
 }
 
 // @ts-ignore
@@ -102,10 +108,8 @@ main(storeId)
   })
   .catch((error) => {
     console.error(error);
-  })
-  .finally(() => {
-    // if store defined, shutdown
     if (store) {
       store.shutdown();
     }
-  });
+  })
+  .finally(() => {});

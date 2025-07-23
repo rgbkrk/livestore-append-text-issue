@@ -92,6 +92,7 @@ const materializers = State.SQLite.materializers(events, {
     )[0];
 
     if (!existingOutput) {
+      console.log("Output not found");
       return [];
     }
 
