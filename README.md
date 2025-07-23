@@ -44,7 +44,7 @@ That will rapidly add text as if an LLM (or a plain computer) types in little ba
 ## One liner
 
 ```
-export STORE_ID=$(head -c 10 /dev/urandom | xxd -p); open "http://localhost:60001/?storeId=$STORE_ID" ; echo "Waiting for ui to load"; sleep 5; echo "Away we go!"; tsx server-client.ts $STORE_ID
+export STORE_ID=$(head -c 10 /dev/urandom | xxd -p); open "http://localhost:60001/?storeId=$STORE_ID" && echo "Waiting for ui to load" && sleep 5 && echo "Away we go" && tsx server-client.ts $STORE_ID
 ```
 
 ## What happens

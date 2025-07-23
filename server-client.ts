@@ -72,6 +72,9 @@ async function tokenGeneration(store: Store<typeof schema>) {
 
     currentPos += chunkSize;
   }
+
+  await sleep(1000);
+  store.shutdown();
 }
 
 async function main(storeId?: string) {
